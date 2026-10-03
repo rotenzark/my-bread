@@ -1,0 +1,354 @@
+/* PLUMBING_V 1 — reset tecnico canonico (Toolkit/boilerplate/plumbing.css) */
+[hidden] { display: none !important; }
+img { max-width: 100%; height: auto; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ══════════ MY BREAD — panetteria focacceria, Via Mecenate 76 ══════════
+   La pagina è fatta delle loro cose: la testata è il bancone di legno bruciato con le lettere bianche staccate; i titoli dei tre
+   mestieri sono insegne di legno come «Pasticceria» e «Fornaio» sopra le vetrine; le foto stanno in cornici di listelli d'abete;
+   ai lati dell'apertura i campi rosso, blu e giallo del pannello della parete; le parole dei clienti sul nero della lavagna; in
+   fondo il pavimento alla veneziana. La firma è la lavagna a sei lati (_myb_firma.mjs). Volkhov per le insegne e i titoli, Inria
+   Sans per il testo, Playwrite IT Trad per tutto quello che è scritto a gesso. */
+:root {
+  --muro: #F7F4EC;
+  --bianco: #FFFFFF;
+  --lavagna: #2A2D2B;
+  --gessetto: #F4F1E8;
+  --rosso: #D5352B;
+  --giallo: #F2C91D;
+  --blu: #1F4FB2;
+  --abete: #E3BB72;
+  --abete-2: #B98E4A;
+  --legno: #2E1B10;
+  --legno-2: #4A2B16;
+  --acciaio: #DDDCD7;
+  --inchiostro: #1D1A17;
+  --grigio: #57524A;
+  --aperto: #2E8B4E;
+  --f-insegna: 'Volkhov', Georgia, 'Times New Roman', serif;
+  --f-testo: 'Inria Sans', 'Trebuchet MS', Arial, sans-serif;
+  --f-gesso: 'Playwrite IT Trad', 'Segoe Script', 'Brush Script MT', cursive;
+  --gutter: 16px;
+  --testata-h: 64px;
+}
+@media (min-width: 760px) { :root { --gutter: 26px; } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; color: var(--inchiostro); font: 400 1.08rem/1.6 var(--f-testo); font-variant-numeric: lining-nums; background: var(--muro); }
+a { color: #173F93; }
+b, strong { font-weight: 700; }
+p { margin: 0; }
+figure { margin: 0; }
+.salta { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 10px 16px; background: #fff; color: #111; text-decoration: none; }
+.salta:focus { top: 10px; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+section[id] { scroll-margin-top: calc(var(--testata-h) + 14px); }
+.intero { white-space: nowrap; }
+:focus-visible { outline: 3px solid var(--blu); outline-offset: 3px; }
+.testata :focus-visible, .capitolo--lavagna :focus-visible, .piede :focus-visible, .menu-mobile :focus-visible, .action-bar :focus-visible { outline-color: var(--giallo); }
+/* finché i caratteri non arrivano il ripiego è più largo: una parola lunga va a capo invece di uscire (riserva-check, #233) */
+h1, h2, h3 { overflow-wrap: anywhere; }
+
+/* ── il legno bruciato del bancone e delle insegne: la venatura in rilievo ── */
+.testata, .insegna, .zoccolo, .piede__dentro, .menu-mobile, .action-bar {
+  background-color: var(--legno);
+  background-image:
+    repeating-linear-gradient(.7deg, rgba(160, 98, 48, .26) 0 2px, transparent 2px 9px),
+    repeating-linear-gradient(-.9deg, rgba(0, 0, 0, .3) 0 1px, transparent 1px 13px),
+    linear-gradient(180deg, rgba(120, 70, 34, .28), rgba(0, 0, 0, .12));
+}
+
+/* ── l'occhiello: maiuscole spaziate, con un triangolo rosso a punta in giù come il campo in alto del pannello ── */
+.occhio { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 12px; font: 700 1rem/1.3 var(--f-testo); letter-spacing: .16em; text-transform: uppercase; color: var(--inchiostro); }
+.occhio::before { content: ''; flex: none; width: 16px; height: 14px; background: var(--rosso); clip-path: polygon(0 0, 100% 0, 50% 100%); }
+.occhio--chiaro { color: var(--gessetto); }
+.occhio--chiaro::before { background: var(--giallo); }
+
+/* ── le insegne di legno: romano grasso bianco, acceso da dietro ── */
+.insegna { display: inline-block; max-width: 100%; padding: .2em .62em .1em; border: 1px solid #1B0F08; color: #FFFFFF; font: 700 1em/1.2 var(--f-insegna); letter-spacing: .01em; text-shadow: 0 0 14px rgba(255, 233, 185, .55), 0 0 3px rgba(255, 244, 220, .8); box-shadow: 0 5px 0 rgba(0, 0, 0, .14), 0 14px 22px rgba(40, 24, 10, .2); }
+.insegna--capitolo { display: block; width: fit-content; min-width: min(100%, 13em); margin: 0 auto 34px; padding: .18em 1em .08em; font-size: clamp(2.3rem, 1.5rem + 3.6vw, 4.2rem); text-align: center; }
+
+/* ── la testata: il bancone ── */
+.testata { position: sticky; top: 0; z-index: 50; border-bottom: 5px solid var(--abete); }
+.testata__dentro { display: flex; align-items: center; gap: 10px; max-width: 1320px; margin: 0 auto; padding: 6px var(--gutter); min-height: 59px; }
+.bancone { display: inline-flex; min-width: 0; color: #FFFFFF; text-decoration: none; }
+.bancone span, .piede__bancone { font: 700 1.2rem/1.2 var(--f-testo); letter-spacing: .46em; text-transform: uppercase; color: #FFFFFF; white-space: nowrap; }
+.voci { display: none; }
+.testata__azioni { margin-left: auto; display: flex; align-items: center; gap: 8px; flex: none; }
+.lingue { display: flex; }
+.lingue button { min-width: 36px; min-height: 40px; padding: 1px 6px 0; border: 2px solid #A98A66; background: transparent; color: #FFFFFF; font: 700 .95rem var(--f-testo); cursor: pointer; }
+.lingue button + button { border-left: 0; }
+/* la lingua scelta: anche alla prima apertura in italiano (il plumbing mette .is-on solo quando si cambia lingua, aria-pressed c'è
+   già nell'HTML) e senza JS */
+.lingue button.is-on, .lingue button[aria-pressed="true"] { background: #FFFFFF; color: var(--legno); }
+.chiama { display: none; align-items: center; min-height: 42px; padding: 0 18px; background: var(--abete); color: var(--inchiostro); font: 700 1rem var(--f-testo); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; }
+.chiama:hover { background: #F0CD8C; }
+.burger { display: inline-flex; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; padding: 10px; border: 2px solid #A98A66; background: transparent; cursor: pointer; }
+.burger span { display: block; height: 2px; background: #FFFFFF; transition: transform .2s, opacity .2s; }
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.menu-mobile { position: fixed; top: var(--testata-h); left: 0; right: 0; z-index: 49; max-height: calc(100vh - var(--testata-h)); overflow-y: auto; padding: 10px var(--gutter) 22px; box-shadow: 0 12px 24px rgba(0, 0, 0, .35); }
+.menu-mobile a { display: block; padding: 13px 2px 10px; border-bottom: 1px solid #6B4A30; color: #FFFFFF; font: 700 1.5rem/1.2 var(--f-insegna); text-decoration: none; }
+.menu-mobile__tel { display: flex !important; justify-content: center; gap: 8px; margin-top: 16px; border: 0 !important; background: var(--abete); color: var(--inchiostro) !important; padding: 13px 8px !important; font: 700 1.1rem/1.2 var(--f-testo) !important; letter-spacing: .08em; text-transform: uppercase; }
+
+/* ── l'apertura: la facciata. Tutto al centro; ai lati (desktop) i campi di colore del pannello ── */
+.apertura { position: relative; overflow: hidden; background: var(--muro); }
+.apertura__dentro { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; max-width: 1040px; margin: 0 auto; padding: 38px var(--gutter) 46px; text-align: center; }
+.nome { margin: 0 0 20px; display: flex; flex-direction: column; align-items: center; gap: 6px; max-width: 100%; }
+/* «My Bread» come sulla lavagna: il corsivo di scuola */
+.nome__gesso { font: 400 clamp(2.5rem, 1.8rem + 3.4vw, 4.4rem)/1.75 var(--f-gesso); color: var(--lavagna); }
+/* l'H1 sulle due insegne affiancate, col pilastro in mezzo come sulla facciata */
+.nome__insegne { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 22px; max-width: 100%; font-size: clamp(2.1rem, 1.2rem + 4.6vw, 4.6rem); }
+.apertura__frase { max-width: 26em; margin: 0 0 22px; text-wrap: balance; font: 400 clamp(1.25rem, 1.1rem + .7vw, 1.6rem)/1.45 var(--f-testo); }
+/* stato e voto su righe loro: lo stato scritto dal JS non sposta niente (firma-posto) */
+.apertura__riga { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.voto { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 2px 10px; margin: 0; }
+.voto__n { font: 700 2.3rem/1 var(--f-insegna); }
+.stato { display: inline-flex; align-items: center; gap: 9px; margin: 0; font: 700 1.06rem/1.4 var(--f-testo); }
+.stato::before { content: ''; width: 11px; height: 11px; border-radius: 50%; background: currentColor; opacity: .4; flex: none; }
+.stato.is-aperto::before { opacity: 1; background: var(--aperto); box-shadow: 0 0 0 3px rgba(46, 139, 78, .25); }
+.apertura__azioni { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 24px; }
+.bottone { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; max-width: 100%; min-height: 52px; padding: 0 24px; border: 3px solid var(--lavagna); background: transparent; color: var(--lavagna); font: 700 1.02rem/1.1 var(--f-testo); letter-spacing: .12em; text-transform: uppercase; text-align: center; text-decoration: none; cursor: pointer; transition: background .15s, color .15s; }
+.bottone--pieno { background: var(--lavagna); color: #FFFFFF; }
+.bottone--pieno:hover { background: #45494A; }
+.bottone--vuoto:hover { background: var(--lavagna); color: #FFFFFF; }
+.apertura__foto { width: 100%; max-width: 940px; margin-top: 40px; }
+figcaption { margin-top: 10px; font-size: 1rem; line-height: 1.45; color: var(--grigio); }
+.foto { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.foto img { display: block; width: 100%; height: auto; }
+/* la cornice: listelli d'abete, come intorno al pannello */
+.cornice { border: 8px solid var(--abete); box-shadow: 0 0 0 1px var(--abete-2), inset 0 0 0 1px var(--abete-2), 0 14px 26px rgba(60, 40, 12, .18); }
+/* i campi di colore ai lati, come i fianchi del pannello (solo sul desktop largo): a sinistra rosso, blu e la punta rossa, a destra
+   la punta gialla, il rosso e il giallo, coi listelli d'abete */
+.campi { position: absolute; top: 0; width: clamp(120px, 13vw, 250px); height: calc(100% - 40px); display: none; }
+.campi--sx { left: 0; }
+.campi--dx { right: 0; }
+.campo--rosso { fill: var(--rosso); }
+.campo--giallo { fill: var(--giallo); }
+.campo--blu { fill: var(--blu); }
+.campo-listello { fill: none; stroke: var(--abete); stroke-width: 9px; }
+/* lo zoccolo delle vetrine: legno bruciato col bordo d'abete */
+.zoccolo { position: relative; z-index: 2; height: 34px; border-top: 6px solid var(--abete); }
+
+/* ── i capitoli ── */
+.capitolo { padding: 66px max(var(--gutter), calc((100% - 1180px) / 2)) 64px; background: var(--muro); }
+.capitolo--muro + .capitolo--muro { border-top: 6px solid var(--abete); }
+.capitolo--acciaio { background-color: var(--acciaio); background-image: linear-gradient(100deg, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0) 38%, rgba(0, 0, 0, .05) 70%, rgba(255, 255, 255, .28)); border-top: 6px solid var(--abete); border-bottom: 6px solid var(--abete); }
+.capitolo--lavagna { background: var(--lavagna); color: var(--gessetto); border-top: 8px solid var(--abete); border-bottom: 8px solid var(--abete); }
+.capitolo--stretto { padding-left: max(var(--gutter), calc((100% - 800px) / 2)); padding-right: max(var(--gutter), calc((100% - 800px) / 2)); }
+/* Volkhov ha aste lunghe: a 1,12 la «p» di «parole» toccava la «h» di «chi» a 360 px (interlinea-check) */
+.capitolo__titolo { max-width: 18em; margin: 0 0 18px; font: 700 clamp(2rem, 1.4rem + 2.4vw, 3.3rem)/1.22 var(--f-insegna); color: var(--inchiostro); text-wrap: balance; }
+.capitolo--lavagna .capitolo__titolo { color: #FFFFFF; }
+.capitolo__intro { max-width: 36em; margin: 0 0 26px; font-size: 1.16rem; }
+.capitolo__intro--centro { margin-left: auto; margin-right: auto; text-align: center; }
+.capitolo__nota { max-width: 34em; margin: 26px 0 0; color: var(--grigio); }
+.capitolo--lavagna a { color: #FFFFFF; }
+
+/* la lavagna (la firma) */
+.lavagna { display: grid; gap: 34px; align-items: start; }
+.lavagna__vera { max-width: 330px; }
+.lavagna-fig { margin: 0; -webkit-user-select: none; user-select: none; }
+.lavagna-fig > svg { max-width: 700px; margin: 0 auto; }
+.lavagna__didascalia { max-width: 34em; min-height: 3.1em; margin: 12px auto 0; font-size: 1.04rem; line-height: 1.5; text-align: center; color: var(--grigio); }
+.lavagna__d { display: none; }
+.lavagna-fig[data-modo="0"] .lavagna__d[data-m="0"], .lavagna-fig[data-modo="1"] .lavagna__d[data-m="1"] { display: inline; }
+.lavagna__modi { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 14px; }
+.lavagna__modi button { min-height: 48px; padding: 0 26px; border: 3px solid var(--lavagna); background: transparent; color: var(--lavagna); font: 700 1.02rem/1.1 var(--f-testo); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+.lavagna__modi button:hover { background: rgba(42, 45, 43, .1); }
+.lavagna__modi button[aria-pressed="true"] { background: var(--lavagna); color: #FFFFFF; }
+/* senza JS il modo non cambia: i bottoni restano nascosti col loro posto (#240) */
+.no-js .lavagna__modi { visibility: hidden; }
+
+/* la litania: la parola piccola in corsivo sopra, la parola grande sotto, con un triangolo davanti */
+.litania { display: grid; gap: 10px 26px; margin: 0; padding: 0; list-style: none; }
+.litania li { position: relative; padding-left: 30px; }
+.litania li::before { content: ''; position: absolute; left: 0; top: 2.35em; width: 18px; height: 16px; background: var(--rosso); clip-path: polygon(0 0, 100% 0, 50% 100%); }
+.litania li:nth-child(3n+2)::before { background: var(--giallo); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.litania li:nth-child(3n+3)::before { background: var(--blu); clip-path: polygon(0 0, 100% 50%, 0 100%); }
+.litania__p { display: block; font: 400 1.06rem/1.9 var(--f-gesso); color: var(--grigio); }
+.litania__g { display: block; font: 700 clamp(1.7rem, 1.3rem + 1.6vw, 2.5rem)/1.2 var(--f-insegna); }
+
+/* fornaio */
+.fornaio { display: grid; gap: 34px; align-items: start; }
+/* la mollica (1100 × 618) e la crosta (1100 × 724) alla stessa altezza: crescono come le loro proporzioni dai 16 px della cornice */
+.fornaio__foto { display: flex; flex-wrap: wrap; gap: 22px 18px; align-items: flex-start; }
+.fornaio__foto > figure { flex: 1.7799 1 16px; min-width: 0; }
+.fornaio__foto > figure:last-child { flex: 1.5193 1 16px; }
+.fornaio__foto > .fornaio__grande { flex: 1 1 100%; }
+
+/* focacceria: le due teglie con la targhetta di lavagna; le colonne sono proporzionali alle foto (stessa altezza) */
+.teglie { display: grid; gap: 26px; align-items: stretch; max-width: 1100px; margin: 0 auto; }
+.targhetta { flex: 1; display: flex; align-items: center; justify-content: center; margin: 0; padding: 4px 14px 6px; background: var(--lavagna); color: var(--gessetto); font: 400 1.15rem/1.9 var(--f-gesso); text-align: center; border: 8px solid var(--abete); border-top: 0; box-shadow: 0 0 0 1px var(--abete-2), 0 14px 26px rgba(60, 40, 12, .18); }
+.teglia { display: flex; flex-direction: column; }
+.teglia .cornice { box-shadow: 0 0 0 1px var(--abete-2), inset 0 0 0 1px var(--abete-2); }
+.mensola-riga { display: grid; gap: 28px; align-items: center; max-width: 1100px; margin: 44px auto 0; }
+.mensola-riga__testo p { max-width: 30em; margin: 0 0 14px; font-size: 1.16rem; }
+
+/* pasticceria */
+.dolce { display: grid; gap: 30px; align-items: center; max-width: 1040px; margin: 0 auto; }
+.dolce__foto { max-width: 460px; width: 100%; justify-self: center; }
+
+/* recensioni: sul nero della lavagna, i nomi a gesso */
+.voto--sezione { justify-content: flex-start; margin: 0 0 28px; }
+.capitolo--lavagna .voto__n { color: var(--giallo); }
+.recensioni { margin: 0; padding: 0; list-style: none; column-gap: 34px; }
+.recensione { margin: 0 0 28px; padding: 4px 0 2px 20px; border-left: 6px solid var(--rosso); break-inside: avoid; }
+.recensione:nth-child(3n+2) { border-left-color: var(--giallo); }
+.recensione:nth-child(3n+3) { border-left-color: #6E97EE; }
+.recensione__testo { margin: 0; font-size: 1.08rem; line-height: 1.58; overflow-wrap: anywhere; }
+.recensione__chi { margin: 8px 0 0; font-size: 1rem; line-height: 1.4; color: #CFCBC0; }
+.recensione__chi b { display: block; font: 400 1.25rem/1.9 var(--f-gesso); color: #FFFFFF; }
+.recensioni__nota { max-width: 48em; margin: 30px 0 0; font-size: 1rem; color: #CFCBC0; }
+
+/* orari e strada */
+.orari-riga { display: grid; gap: 40px; align-items: start; }
+.indirizzo { margin: 0 0 22px; }
+.indirizzo div { display: grid; grid-template-columns: 7.4em minmax(0, 1fr); gap: 10px; padding: 10px 0 8px; border-bottom: 1px solid #D9D2C2; }
+.indirizzo dt { font: 700 .98rem/1.7 var(--f-testo); letter-spacing: .12em; text-transform: uppercase; }
+.indirizzo dd { margin: 0; overflow-wrap: anywhere; }
+.dove__azioni { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
+/* il riquadro d'abete con l'etichetta che taglia il bordo in alto */
+.orario { position: relative; max-width: 460px; width: 100%; margin-top: 14px; padding: 28px 20px 20px; background: var(--bianco); border: 8px solid var(--abete); box-shadow: 0 0 0 1px var(--abete-2), inset 0 0 0 1px var(--abete-2); }
+.orario__titolo { position: absolute; left: 0; right: 0; top: -1.2em; margin: 0; text-align: center; font: 700 1.5rem/1.5 var(--f-insegna); }
+.orario__titolo span { display: inline-block; padding: 0 16px; background: var(--muro); color: var(--inchiostro); }
+.giorno { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; padding: 8px 10px 7px; border-bottom: 1px solid #E6DFD0; }
+.giorno:last-child { border-bottom: 0; }
+.giorno__ore { margin-left: auto; white-space: nowrap; font-weight: 700; }
+.giorno.is-today { background: var(--giallo); }
+.orario .stato { margin-top: 14px; }
+.orari__nota { margin: 10px 0 0; color: var(--grigio); font-size: 1rem; }
+.cartina { margin-top: 40px; overflow: hidden; background: var(--bianco); color: var(--inchiostro); border: 8px solid var(--abete); box-shadow: 0 0 0 1px var(--abete-2), inset 0 0 0 1px var(--abete-2); }
+.cartina a { color: var(--inchiostro); }
+.cartina iframe { display: block; width: 100%; height: 380px; border: 0; }
+/* la nota della mappa a 16 px: sotto i 15 px gli accenti piccoli si perdono (accenti-check, #306) */
+.cartina .mappa-clic__nota { font-size: 1rem; }
+
+/* le domande */
+.domande { max-width: 800px; border-top: 6px solid var(--abete); }
+.domanda { border-bottom: 1px solid #D9D2C2; }
+.domanda summary { position: relative; padding: 16px 40px 12px 2px; font: 700 1.3rem/1.3 var(--f-insegna); cursor: pointer; list-style: none; }
+.domanda summary::-webkit-details-marker { display: none; }
+.domanda summary::after { content: ''; position: absolute; right: 8px; top: 1.25em; width: 18px; height: 15px; background: var(--blu); clip-path: polygon(0 0, 100% 0, 50% 100%); transition: transform .2s; }
+.domanda[open] summary::after { transform: rotate(180deg); background: var(--rosso); }
+.domanda p { max-width: 40em; margin: 0 0 18px; }
+
+/* ── la chiusura: una fascia di pavimento alla veneziana, poi il bancone ── */
+.veneziana { height: 88px; border-top: 6px solid var(--abete); background-color: #B8B5AD; background-image:
+  radial-gradient(ellipse 7px 5px at 22% 30%, #F4F2EC 0 96%, transparent 100%),
+  radial-gradient(ellipse 5px 6px at 71% 62%, #34332F 0 96%, transparent 100%),
+  radial-gradient(ellipse 8px 6px at 46% 78%, #8A877F 0 96%, transparent 100%),
+  radial-gradient(ellipse 4px 5px at 84% 16%, #E6E3DA 0 96%, transparent 100%),
+  radial-gradient(ellipse 4px 3px at 12% 74%, #4D4A45 0 96%, transparent 100%),
+  radial-gradient(ellipse 5px 4px at 58% 22%, #FBF9F4 0 96%, transparent 100%),
+  radial-gradient(ellipse 6px 4px at 33% 55%, #D8D5CC 0 96%, transparent 100%);
+  background-size: 47px 37px, 67px 53px, 79px 61px, 41px 47px, 59px 43px, 31px 53px, 53px 71px; }
+.piede { color: #E9DFD2; }
+.piede__dentro { margin: 0; padding: 46px var(--gutter) 100px; text-align: center; }
+.piede__dentro > * { max-width: 54em; margin-left: auto; margin-right: auto; }
+.piede__bancone { margin-bottom: 20px; font-size: 1.5rem; white-space: normal; }
+.piede__dove, .piede__orario { margin-bottom: 8px; overflow-wrap: anywhere; }
+.piede a { color: #FFFFFF; }
+.piede__cred { margin-top: 18px; margin-bottom: 12px; font-size: 1rem; }
+.freccia { font-family: Arial, sans-serif; }
+
+/* ── reveal (plumbing) ── */
+.js .reveal { opacity: 0; }
+.js .reveal.in-view { opacity: 1; }
+html:not(.js) .reveal { opacity: 1; }
+.reduced-motion .reveal { opacity: 1 !important; }
+
+/* ── la barra e la lightbox ── */
+.action-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); box-shadow: 0 -4px 0 var(--abete); transform: translateY(110%); transition: transform .25s; }
+.action-bar.is-visible { transform: translateY(0); }
+.action-bar a { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 54px; padding: 0 4px; overflow-wrap: anywhere; text-align: center; color: #FFFFFF; font: 700 1rem var(--f-testo); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; }
+.action-bar a:first-child { background: var(--abete); color: var(--inchiostro); }
+#lightbox { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(20, 16, 12, .95); }
+#lightbox[hidden] { display: none !important; }
+#lightbox img { width: auto; max-width: min(1100px, 100%); max-height: 88vh; }
+#lightboxClose { position: absolute; top: 14px; right: 16px; width: 48px; height: 48px; border: 1px solid rgba(255, 255, 255, .6); border-radius: 50%; background: transparent; color: #fff; font-size: 32px; line-height: 1; cursor: pointer; }
+
+/* ── le larghezze ── */
+@media (max-width: 379px) {
+  .testata__dentro { gap: 6px; }
+  .bancone span { letter-spacing: .3em; font-size: 1.05rem; }
+  .lingue button { min-width: 32px; }
+  .bottone { padding: 0 16px; }
+  .indirizzo div { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .cornice { border-width: 6px; }
+}
+@media (min-width: 560px) {
+  .chiama { display: inline-flex; }
+  .litania { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 760px) {
+  .action-bar { display: none; }
+  .piede__dentro { padding-bottom: 54px; }
+  .recensioni { columns: 2; }
+  /* stessa altezza: le due foto (1300 × 679 e 1000 × 996) crescono come le loro proporzioni, a partire dai 16 px della cornice
+     (con le sole colonne in fr la cornice uguale per tutte e due sfasava di qualche pixel il fondo delle foto) */
+  .teglie { display: flex; }
+  .teglia { flex: 1.9146 1 16px; min-width: 0; }
+  .teglia--alta { flex: 1.004 1 16px; }
+  .mensola-riga { grid-template-columns: minmax(0, 1fr) minmax(0, 460px); gap: 44px; }
+  .dolce { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 50px; }
+  .litania--dolce { grid-template-columns: minmax(0, 1fr); }
+}
+@media (min-width: 980px) {
+  /* le colonne in proporzione (con 1fr accanto a 700 px, a 980–1180 il testo restava largo 170–220 px) e la firma al centro
+     dell'altezza del testo con la foto della parete: le due colonne non finiscono più a 230–450 px una dall'altra */
+  .lavagna { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 50px; align-items: center; }
+  .lavagna__vera { max-width: 280px; }
+  .fornaio { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 50px; }
+  /* accanto alle foto la colonna è stretta: la litania del pane torna in fila, una parola grande per riga (troncati: «wholemeal»
+     e «integrale» uscivano a 1024 e a 1440) */
+  .fornaio .litania { grid-template-columns: minmax(0, 1fr); }
+  .recensioni { columns: 3; }
+  .orari-riga { grid-template-columns: minmax(0, 1fr) minmax(0, 460px); gap: 60px; }
+  .litania--dolce { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1180px) {
+  .testata__dentro { gap: 16px; }
+  .voci { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-left: 30px; }
+  .voci a { padding: 4px 1px 2px; color: #FFFFFF; font: 700 .98rem var(--f-testo); letter-spacing: .1em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+  .voci a:hover, .voci a[aria-current="true"] { color: var(--giallo); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 7px; }
+  .burger { display: none; }
+}
+@media (min-width: 1340px) {
+  .campi { display: block; }
+}
+
+/*LAVAGNA*/
+/* la lavagna — generato da _myb_firma.mjs: non modificare a mano */
+.lavagna__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.lv-ombra { fill: rgba(60, 45, 25, .16); }
+.lv-tri--rosso { fill: #D5352B; }
+.lv-tri--giallo { fill: #F2C91D; }
+.lv-tri--blu { fill: #1F4FB2; }
+.lv-esagono { fill: #2A2D2B; }
+.lv-alone { fill: #E9E6DC; }
+.lv-listello { fill: none; stroke: #E3BB72; stroke-width: 11; stroke-linejoin: miter; }
+.lv-cornice { fill: none; stroke: #DDB265; stroke-width: 15; }
+.lv-mensola { fill: #E3BB72; stroke: #B98E4A; stroke-width: 1.5; }
+.lv-reggi { fill: none; stroke: #CFA35A; stroke-width: 12; }
+.lv-scritta text { font-family: 'Playwrite IT Trad', 'Segoe Script', 'Brush Script MT', cursive; font-weight: 400; fill: #F4F1E8; }
+.lv-tratto { fill: none; stroke: #F4F1E8; stroke-width: 4.2; stroke-linecap: butt; stroke-linejoin: round; }
+.lv-gesso-corpo { fill: #FBFAF4; stroke: #B9B5A7; stroke-width: 1.2; }
+.lv-canc-legno { fill: #C99A52; stroke: #8E6A33; stroke-width: 1.2; }
+.lv-canc-feltro { fill: #55585A; stroke: #2F3132; stroke-width: 1.2; }
+.lavagna-fig[data-modo="0"] .modo:not([data-m="0"]) { display: none; }
+.lavagna-fig[data-modo="1"] .modo:not([data-m="1"]) { display: none; }
+.firma-attesa .lv-scritta, .firma-attesa .lv-tratto { opacity: 0; }
+/*/LAVAGNA*/
+
+/*MAPPACLIC*/
+/* la mappa Google si carica solo al clic (giro privacy 1/10/2026) */
+.mappa-clic { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; min-height: var(--mappa-h, 320px); box-sizing: border-box; padding: 24px; text-align: center; background: repeating-linear-gradient(0deg, rgba(127, 127, 127, 0.14) 0 1px, transparent 1px 28px), repeating-linear-gradient(90deg, rgba(127, 127, 127, 0.14) 0 1px, transparent 1px 28px); }
+.mappa-clic__velo { display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 32em; }
+.mappa-clic__btn { display: inline-block; padding: 0.75em 1.4em; border: 2px solid currentColor; border-radius: 999px; color: inherit; font: inherit; font-weight: 600; line-height: 1.2; text-decoration: none; background: transparent; cursor: pointer; }
+.mappa-clic__btn:hover, .mappa-clic__btn:focus-visible { text-decoration: underline; }
+.mappa-clic__nota { margin: 0; font-size: 0.85em; line-height: 1.45; }
+/*/MAPPACLIC*/
